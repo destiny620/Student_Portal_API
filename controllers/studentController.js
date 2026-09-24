@@ -21,6 +21,34 @@ export const createStudentAccount = async (req, res) => {
     }
 
 
+    export const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Invalid credentials"
+      });
+    }
+    return res.status(200).json({
+      message: "User logged in successfully",
+      data: user
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error logging in user",
+      error: error.message
+    });
+  }
+};
+
+
 //GET A SINGLE STUDENT (GET)
 export const getSingleStudent = async (req, res) => {
   try {

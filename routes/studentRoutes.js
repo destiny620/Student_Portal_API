@@ -4,18 +4,20 @@ import {
     getSingleStudent,
     updateStudent,
     deleteStudent,
-    getAllStudents
+    getAllStudents,
+    loginUser
 
 } from '../controllers/studentController.js';
 
-const router = express.Router();
+const studentRouter = express.Router();
 
-router.post('/new-student', createStudentAccount);
-router.get('/get-student/:id', getSingleStudent);
-router.get('/get-all-students', getAllStudents);
-router.put('/update-student/:id', updateStudent);
-router.delete('/delete-student/:id', deleteStudent);
+studentRouter.post('/new-student', createStudentAccount);
+studentRouter.get('/get-student/:id', getSingleStudent);
+studentRouter.get('/get-all-students', getAllStudents);
+studentRouter.put('/update-student/:id', updateStudent);
+studentRouter.delete('/delete-student/:id', deleteStudent);
+studentRouter.post('/login', loginUser);
 
-export default router;
+export default studentRouter;;
 
 //GET http://localhost:3000/students/get-student/6a9bdfdc4843958b587826a4
